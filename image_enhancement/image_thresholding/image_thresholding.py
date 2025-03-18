@@ -1,6 +1,8 @@
 import cv2
 import matplotlib.pyplot as plt
 
+from image_enhancement.basic_image_enhancement import img_bgr
+
 img_read = cv2.imread("building-windows.jpg", cv2.IMREAD_GRAYSCALE)
 retval, img_thresh = cv2.threshold(img_read, 100, 255, cv2.THRESH_BINARY)
 
@@ -27,4 +29,5 @@ plt.subplot(222);plt.imshow(img_thresh_gbl_1, cmap="gray");plt.title("Thresholde
 plt.subplot(223);plt.imshow(img_thresh_gbl_2, cmap="gray");plt.title("Thresholded (global: 130)")
 plt.subplot(224);plt.imshow(img_thresh_adp, cmap="gray");plt.title("Thresholded (Adaptive)")
 plt.show()
+
 
