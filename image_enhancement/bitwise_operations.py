@@ -60,3 +60,23 @@ retval, img_mask = cv2.threshold(img_gray, 127, 255, cv2.THRESH_BINARY)
 plt.imshow(img_mask, cmap="gray")
 print(img_mask.shape)
 plt.show()
+
+#Invert the Mask
+img_mask_inv = cv2.bitwise_not(img_mask)
+plt.imshow(img_mask_inv, cmap="gray")
+plt.show()
+
+#Apply background on the Mask
+img_background = cv2.bitwise_and(img_background_rgb, img_background_rgb, mask=img_mask)
+plt.imshow(img_background)
+plt.show()
+
+#Isolate foreground from image
+img_foreground = cv2.bitwise_and(img_rgb, img_rgb, mask=img_mask_inv)
+plt.imshow(img_foreground)
+plt.show()
+
+#Result: Merge Foreground and Background
+result = cv2.add(img_background, img_foreground)
+plt.imshow(result)
+cv2.imwrite("logo_final.png", result[:, :, ::-1])
